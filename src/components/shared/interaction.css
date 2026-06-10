@@ -1,0 +1,56 @@
+:root {
+  --m3-state-hover-opacity: 0.08;
+  --m3-state-focus-opacity: 0.12;
+  --m3-state-pressed-opacity: 0.12;
+  --m3-focus-ring-width: 2px;
+  --m3-focus-ring-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .m3-interactive,
+  .m3-interactive::before,
+  .m3-interactive * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.m3-interactive {
+  position: relative;
+  isolation: isolate;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.m3-interactive:disabled,
+.m3-interactive[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.m3-interactive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--m3-state-color, currentColor);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.m3-interactive:hover:not(:disabled):not([data-disabled])::before {
+  opacity: var(--m3-state-hover-opacity);
+}
+
+.m3-interactive:focus-visible {
+  outline: var(--m3-focus-ring-width) solid var(--md-sys-color-primary);
+  outline-offset: var(--m3-focus-ring-offset);
+}
+
+.m3-interactive:active:not(:disabled):not([data-disabled])::before {
+  opacity: var(--m3-state-pressed-opacity);
+}
