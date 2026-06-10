@@ -181,7 +181,7 @@ function toggleDark() {
     <header class="border-b border-outline-variant px-6 py-4">
       <div class="mx-auto flex max-w-5xl items-center justify-between gap-4">
         <div>
-          <h1 class="md-typescale-headline-small">reka-m3 Playground</h1>
+          <h1 class="md-typescale-headline-small">Reka + M3 Playground</h1>
           <p class="md-typescale-body-medium text-on-surface-variant">
             Material Design 3 tokens + Phase 2a & 2b components
           </p>

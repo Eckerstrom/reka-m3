@@ -1,7 +1,7 @@
 {
   "name": "reka-m3",
   "version": "0.0.1",
-  "description": "Accessible Vue components built on Reka UI and styled with Material Design 3 tokens",
+  "description": "Reka + M3 — accessible Vue components built on Reka UI and styled with Material Design 3 tokens",
   "license": "MIT",
   "type": "module",
   "private": true,

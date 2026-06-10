@@ -1,4 +1,4 @@
-# reka-m3
+# Reka + M3
 
 Accessible Vue components built on [Reka UI](https://reka-ui.com) and styled with [Material Design 3](https://m3.material.io) tokens using [Tailwind CSS](https://tailwindcss.com).
 

@@ -1,6 +1,6 @@
 # Skipped M3 components
 
-These Material Design 3 components are intentionally not implemented in reka-m3 Phase 2b.
+These Material Design 3 components are intentionally not implemented in Reka + M3.
 
 | M3 component | Reason |
 |--------------|--------|
