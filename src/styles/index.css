@@ -49,6 +49,9 @@
   --radius-lg: var(--md-sys-shape-corner-large);
   --radius-xl: var(--md-sys-shape-corner-extra-large);
   --radius-full: var(--md-sys-shape-corner-full);
+
+  --breakpoint-m3-compact: 600px;
+  --breakpoint-m3-expanded: 840px;
 }
 
 body {

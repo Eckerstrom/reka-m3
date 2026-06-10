@@ -5,9 +5,7 @@ These Material Design 3 components are intentionally not implemented in Reka + M
 | M3 component | Reason |
 |--------------|--------|
 | Loading indicator | No Reka spinner primitive |
-| Navigation bar | Layout pattern; no Reka primitive |
-| Navigation rail | Layout pattern; no Reka primitive |
-| App bars | No Reka app bar (`M3Toolbar` covers action rows only) |
+| App bars | `M3TopAppBar` covers basic top app bar; full collapsing variants still skipped |
 | Badges | Presentational |
 | Cards | Presentational surface |
 | Carousel | No Reka carousel |

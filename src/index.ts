@@ -1,6 +1,7 @@
 export * from './theme'
 
 export * from './types/color'
+export * from './types/navigation'
 
 export * from './components/button'
 export * from './components/icon-button'
@@ -33,5 +34,6 @@ export * from './components/progress'
 export * from './components/snackbar'
 export * from './components/tooltip'
 export * from './components/divider'
+export * from './components/layouts'
 
 export { cn } from './utils/cn'

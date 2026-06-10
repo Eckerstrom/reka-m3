@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, h, ref } from 'vue'
 import { parseDate, parseTime, type DateValue } from '@internationalized/date'
 import type { TimeValue } from 'reka-ui'
 import { createTheme, themeToCssVars } from 'reka-m3/theme'
@@ -41,6 +41,7 @@ import {
   M3MenubarMenu,
   M3MenubarRoot,
   M3MenubarTrigger,
+  M3NavigationBar,
   M3NavigationDrawerClose,
   M3NavigationDrawerContent,
   M3NavigationDrawerHeader,
@@ -48,9 +49,11 @@ import {
   M3NavigationDrawerRoot,
   M3NavigationDrawerTitle,
   M3NavigationDrawerTrigger,
+  M3NavigationRail,
   M3Progress,
   M3Radio,
   M3RadioGroup,
+  M3Scaffold,
   M3Search,
   M3SearchItem,
   M3SegmentedButton,
@@ -73,8 +76,10 @@ import {
   M3TextField,
   M3TimePicker,
   M3Toolbar,
+  M3TopAppBar,
   M3Tooltip,
   M3TooltipProvider,
+  type M3NavDestination,
 } from 'reka-m3'
 
 const isDark = ref(false)
@@ -161,6 +166,45 @@ selectedDate.value = parseDate('2026-06-10')
 selectedTime.value = parseTime('14:30')
 const progressValue = ref(65)
 const snackbarOpen = ref(false)
+
+const scaffoldActive = ref('home')
+const scaffoldPersistSlots = ref(false)
+
+const scaffoldNavIcon = (path: string) => () =>
+  h('svg', { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': 'true' }, [
+    h('path', { d: path }),
+  ])
+
+const scaffoldNavItems: M3NavDestination[] = [
+  {
+    value: 'home',
+    label: 'Home',
+    icon: scaffoldNavIcon(
+      'M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z',
+    ),
+  },
+  {
+    value: 'search',
+    label: 'Search',
+    icon: scaffoldNavIcon(
+      'M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z',
+    ),
+  },
+  {
+    value: 'library',
+    label: 'Library',
+    icon: scaffoldNavIcon(
+      'M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z',
+    ),
+  },
+  {
+    value: 'settings',
+    label: 'Settings',
+    icon: scaffoldNavIcon(
+      'M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96a7.04 7.04 0 0 0-1.63-.94l-.36-2.54A.49.49 0 0 0 14 2h-4a.49.49 0 0 0-.49.42l-.36 2.54a7.04 7.04 0 0 0-1.63.94l-2.39-.96a.49.49 0 0 0-.59.22L2.71 8.06a.49.49 0 0 0 .12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.14.24.44.32.68.22l2.39-.96c.5.38 1.04.68 1.63.94l.36 2.54c.05.28.27.42.49.42h4c.22 0 .44-.14.49-.42l.36-2.54c.59-.26 1.13-.56 1.63-.94l2.39.96c.24.1.54.02.68-.22l1.92-3.32a.49.49 0 0 0-.12-.61l-2.03-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z',
+    ),
+  },
+]
 
 const searchSuggestions = ['Material Design', 'Reka UI', 'Tailwind CSS', 'Vue 3']
 
@@ -621,6 +665,110 @@ function toggleDark() {
                 <p class="md-typescale-body-medium">Consumer class override on bottom sheet content.</p>
               </M3BottomSheetContent>
             </M3BottomSheetRoot>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="mb-4 md-typescale-title-large">Layouts — Scaffold</h2>
+
+        <div class="space-y-8">
+          <div>
+            <h3 class="mb-2 md-typescale-title-medium">Default scaffold (v-if)</h3>
+            <p class="mb-4 md-typescale-body-medium text-on-surface-variant">
+              Resize the window — bar on compact, rail on expanded.
+            </p>
+            <div class="h-[520px] overflow-hidden rounded-xl border border-outline-variant">
+              <M3Scaffold class="h-full min-h-0">
+                <template #top-bar>
+                  <M3TopAppBar title="Scaffold demo">
+                    <template #leading>
+                      <M3IconButton variant="standard" aria-label="Menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                        </svg>
+                      </M3IconButton>
+                    </template>
+                    <template #trailing>
+                      <M3IconButton variant="standard" aria-label="Search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                          <path
+                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5z"
+                          />
+                        </svg>
+                      </M3IconButton>
+                    </template>
+                  </M3TopAppBar>
+                </template>
+                <template #bottom-bar>
+                  <M3NavigationBar v-model="scaffoldActive" :items="scaffoldNavItems" />
+                </template>
+                <template #nav-rail>
+                  <M3NavigationRail v-model="scaffoldActive" :items="scaffoldNavItems" />
+                </template>
+                <div class="grid h-full gap-3 p-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div
+                    v-for="n in 6"
+                    :key="n"
+                    class="rounded-lg bg-surface-container-high p-4 md-typescale-body-medium"
+                  >
+                    Pane content {{ n }}
+                  </div>
+                </div>
+              </M3Scaffold>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="mb-2 md-typescale-title-medium">Persist slots</h3>
+            <M3Switch v-model="scaffoldPersistSlots" class="mb-2">persistSlots</M3Switch>
+            <p class="mb-4 md-typescale-body-medium text-on-surface-variant">
+              With persistSlots enabled, both navigation bar and rail stay mounted; hidden regions use
+              v-show, inert, and aria-hidden.
+            </p>
+            <div class="h-[520px] overflow-hidden rounded-xl border border-outline-variant">
+              <M3Scaffold :persist-slots="scaffoldPersistSlots" class="h-full min-h-0">
+                <template #top-bar>
+                  <M3TopAppBar title="Persist slots" />
+                </template>
+                <template #bottom-bar>
+                  <M3NavigationBar v-model="scaffoldActive" :items="scaffoldNavItems" />
+                </template>
+                <template #nav-rail>
+                  <M3NavigationRail v-model="scaffoldActive" :items="scaffoldNavItems" />
+                </template>
+                <div class="grid h-full gap-3 p-4 sm:grid-cols-2">
+                  <div class="rounded-lg bg-primary-container p-4 md-typescale-body-medium text-on-primary-container">
+                    Active: {{ scaffoldActive }}
+                  </div>
+                  <div class="rounded-lg bg-secondary-container p-4 md-typescale-body-medium text-on-secondary-container">
+                    Both nav components mounted
+                  </div>
+                </div>
+              </M3Scaffold>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="mb-2 md-typescale-title-medium">Top app bar only</h3>
+            <div class="h-[520px] overflow-hidden rounded-xl border border-outline-variant">
+              <M3Scaffold class="h-full min-h-0">
+                <template #top-bar>
+                  <M3TopAppBar title="Minimal scaffold" />
+                </template>
+                <div class="grid h-full gap-3 p-4 sm:grid-cols-2 lg:grid-cols-3">
+                  <div class="rounded-lg bg-surface-container-high p-4 md-typescale-body-medium">
+                    Pane content
+                  </div>
+                  <div class="rounded-lg bg-surface-container-high p-4 md-typescale-body-medium">
+                    Pane content
+                  </div>
+                  <div class="rounded-lg bg-surface-container-high p-4 md-typescale-body-medium">
+                    Pane content
+                  </div>
+                </div>
+              </M3Scaffold>
+            </div>
           </div>
         </div>
       </section>

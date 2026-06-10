@@ -1,0 +1,2 @@
+export const M3_BREAKPOINT_MEDIUM = 600
+export const M3_BREAKPOINT_EXPANDED = 840

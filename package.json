@@ -12,6 +12,8 @@
     "./theme/dark.css": "./src/theme/dark.css",
     "./styles": "./src/styles/index.css",
     "./styles/components.css": "./src/components/shared/interaction.css",
+    "./layouts": "./src/components/layouts/index.ts",
+    "./layouts/*": "./src/components/layouts/*/index.ts",
     "./components/*": "./src/components/*/index.ts"
   },
   "scripts": {
