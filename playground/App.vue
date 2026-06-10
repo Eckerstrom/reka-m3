@@ -430,7 +430,7 @@ function toggleDark() {
             <M3BottomSheetTrigger as-child>
               <M3Button variant="tonal">Bottom sheet</M3Button>
             </M3BottomSheetTrigger>
-            <M3BottomSheetContent class="rounded-t-[28px]">
+            <M3BottomSheetContent class="rounded-t-xl">
               <M3BottomSheetHandle />
               <M3BottomSheetTitle class="mb-2 md-typescale-title-large">Bottom sheet</M3BottomSheetTitle>
               <p class="mb-4 md-typescale-body-medium text-on-surface-variant">
@@ -660,7 +660,7 @@ function toggleDark() {
               <M3BottomSheetTrigger as-child>
                 <M3Button variant="text">Custom sheet shape</M3Button>
               </M3BottomSheetTrigger>
-              <M3BottomSheetContent class="rounded-t-[28px] min-h-48">
+              <M3BottomSheetContent class="rounded-t-xl min-h-48">
                 <M3BottomSheetHandle />
                 <p class="md-typescale-body-medium">Consumer class override on bottom sheet content.</p>
               </M3BottomSheetContent>

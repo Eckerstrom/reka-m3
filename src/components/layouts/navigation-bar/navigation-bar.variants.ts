@@ -9,7 +9,7 @@ export const navigationBarItemVariants = cva(
   [
     'm3-interactive',
     'relative flex flex-1 flex-col items-center justify-center gap-1',
-    'rounded-2xl px-3 py-2',
+    'px-3 py-2',
     'md-typescale-label-medium text-on-surface-variant',
     '[--m3-state-color:var(--color-on-surface-variant)]',
   ],

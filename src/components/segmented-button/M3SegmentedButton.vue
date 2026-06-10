@@ -38,7 +38,7 @@ const effectiveColor = computed(() => props.color ?? 'primary')
         :disabled="item.disabled"
         :class="segmentedButtonItemVariants({ color: effectiveColor })"
       >
-        <span v-if="item.icon" class="text-base" aria-hidden="true">{{ item.icon }}</span>
+        <span v-if="item.icon" aria-hidden="true">{{ item.icon }}</span>
         {{ item.label }}
       </ToggleGroupItem>
     </template>

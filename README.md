@@ -194,9 +194,9 @@ Pass Tailwind utilities; conflicting classes are merged correctly via `cn()`:
 
 ```vue
 <M3Button variant="filled" class="min-h-14 px-10">Custom size</M3Button>
-<M3DialogContent class="max-w-lg rounded-2xl">…</M3DialogContent>
+<M3DialogContent class="max-w-lg rounded-xl">…</M3DialogContent>
 <M3Chip variant="filter" class="rounded-sm">Filter</M3Chip>
-<M3BottomSheetContent class="rounded-t-[28px]">…</M3BottomSheetContent>
+<M3BottomSheetContent class="rounded-t-xl">…</M3BottomSheetContent>
 ```
 
 ## Using the theme
@@ -246,6 +246,7 @@ Typography tokens set font family names only (`--md-ref-typeface-brand`, `--md-r
 |---------|------|
 | Theme / brand | `--md-sys-*` tokens |
 | `variant` / `color` / `size` | `cva` in `*.variants.ts` |
+| Shape | Token-backed `rounded-none` \| `xs` \| `sm` \| `md` \| `lg` \| `xl` \| `full` only — do not use `rounded-2xl`, `rounded-3xl`, or arbitrary radii in component variants |
 | Layout, spacing, colors | Tailwind utilities (`bg-primary`, `rounded-full`, …) |
 | M3 hover/pressed overlay | `.m3-interactive` in `interaction.css` |
 | Consumer tweaks | `class` prop via `cn(variants(...), props.class)` |

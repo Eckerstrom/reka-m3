@@ -13,7 +13,7 @@ export const navigationRailItemVariants = cva(
   [
     'm3-interactive',
     'relative flex flex-col items-center justify-center gap-1',
-    'rounded-2xl px-3 py-3',
+    'px-3 py-3',
     'md-typescale-label-medium text-on-surface-variant',
     '[--m3-state-color:var(--color-on-surface-variant)]',
   ],
