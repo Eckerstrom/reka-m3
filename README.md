@@ -91,8 +91,8 @@ Layout / app-shell components live under `src/components/layouts/` (scaffold, to
 |--------|-------------|
 | `M3Scaffold` | M3 scaffold shell with named chrome slots and responsive visibility |
 | `M3TopAppBar` | Top app bar with `#leading`, title, and `#trailing` slots |
-| `M3NavigationBar` | Bottom navigation bar (compact window size) |
-| `M3NavigationRail` | Vertical navigation rail (expanded window size) |
+| `M3NavigationBar` | Bottom navigation bar (compact window size, &lt; 600px) |
+| `M3NavigationRail` | Vertical navigation rail (medium and expanded, ≥ 600px) |
 
 Import from the main barrel or optional layout subpaths:
 
@@ -102,9 +102,9 @@ import { M3Scaffold } from 'reka-m3/layouts/scaffold'   // layout subpath
 import { M3NavigationBar } from 'reka-m3/layouts/navigation-bar'
 ```
 
-`M3Scaffold` exposes optional `#top-bar`, `#nav-rail`, `#rail-end`, `#rail-bottom`, `#bottom-bar`, and a default pane slot. Chrome regions are shown based on M3 window size classes (compact &lt; 600px, expanded ≥ 840px) and which slots you provide. By default, only the active chrome region is mounted (`v-if`); set `persistSlots` to keep all provided chrome slots mounted and hide inactive regions with `v-show`, `inert`, and `aria-hidden`.
+`M3Scaffold` exposes optional `#top-bar`, `#nav-rail`, `#rail-end`, `#rail-bottom`, `#bottom-bar`, and a default pane slot. Chrome regions are shown based on M3 window size classes (compact &lt; 600px, medium 600–839px, expanded ≥ 840px) and which slots you provide. By default, only the active chrome region is mounted (`v-if`); set `persistSlots` to keep all provided chrome slots mounted and hide inactive regions with `v-show`, `inert`, and `aria-hidden`.
 
-Provide both `#bottom-bar` and `#nav-rail` with the same `v-model` and `items` on `M3NavigationBar` / `M3NavigationRail` — the scaffold shows one at a time (bar on compact, rail on expanded):
+Provide both `#bottom-bar` and `#nav-rail` with the same `v-model` and `items` on `M3NavigationBar` / `M3NavigationRail` — the scaffold shows one at a time (bar on compact, rail on medium and expanded):
 
 ```vue
 <script setup lang="ts">

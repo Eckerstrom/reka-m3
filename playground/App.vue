@@ -676,7 +676,7 @@ function toggleDark() {
           <div>
             <h3 class="mb-2 md-typescale-title-medium">Default scaffold (v-if)</h3>
             <p class="mb-4 md-typescale-body-medium text-on-surface-variant">
-              Resize the window — bar on compact, rail on expanded.
+              Resize the window — bar on compact (&lt; 600px), rail on medium and expanded (≥ 600px).
             </p>
             <div class="h-[520px] overflow-hidden rounded-xl border border-outline-variant">
               <M3Scaffold class="h-full min-h-0">

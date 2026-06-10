@@ -35,7 +35,7 @@ const hasRailBottom = computed(() => !!slots['rail-bottom'])
 const hasBottomBar = computed(() => !!slots['bottom-bar'])
 
 const showTopBar = computed(() => hasTopBar.value)
-const showNavRail = computed(() => windowSize.value === 'expanded' && hasNavRail.value)
+const showNavRail = computed(() => windowSize.value !== 'compact' && hasNavRail.value)
 const showRailEnd = computed(() => windowSize.value === 'expanded' && hasRailEnd.value)
 const showRailBottom = computed(() => windowSize.value === 'compact' && hasRailBottom.value)
 const showBottomBar = computed(() => windowSize.value === 'compact' && hasBottomBar.value)
