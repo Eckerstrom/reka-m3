@@ -15,12 +15,18 @@ export const progressRootVariants = cva('relative overflow-hidden', {
 export const progressIndicatorVariants = cva('', {
   variants: {
     variant: {
-      linear: 'h-full w-full flex-1 rounded-full bg-primary transition-transform duration-300',
-      circular:
-        'absolute inset-0 rounded-full border-4 border-secondary-container border-t-primary transition-transform duration-300',
+      linear:
+        'absolute inset-0 origin-left rounded-full bg-primary transition-transform duration-300',
+      circular: 'size-full',
     },
   },
   defaultVariants: {
     variant: 'linear',
   },
 })
+
+export const progressCircularTrackVariants = cva('stroke-secondary-container')
+
+export const progressCircularIndicatorVariants = cva(
+  'stroke-primary transition-[stroke-dashoffset] duration-300',
+)

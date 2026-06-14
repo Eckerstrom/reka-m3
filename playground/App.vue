@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, h, ref } from 'vue'
+import { computed, h, onMounted, onUnmounted, ref } from 'vue'
 import { parseDate, parseTime, type DateValue } from '@internationalized/date'
 import type { TimeValue } from 'reka-ui'
 import { createTheme, themeToCssVars } from 'reka-m3/theme'
@@ -164,8 +164,36 @@ const selectedDate = ref<DateValue | null>(null)
 const selectedTime = ref<TimeValue | null>(null)
 selectedDate.value = parseDate('2026-06-10')
 selectedTime.value = parseTime('14:30')
-const progressValue = ref(65)
+const progressValue = ref(0)
+const progressCycle = ref(0)
 const snackbarOpen = ref(false)
+
+let progressRaf = 0
+
+onMounted(() => {
+  const cycleMs = 6000
+  let startTime = performance.now()
+
+  function tick(now: number) {
+    const elapsed = now - startTime
+
+    if (elapsed >= cycleMs) {
+      progressCycle.value++
+      startTime = now
+      progressValue.value = 0
+    } else {
+      progressValue.value = (elapsed / cycleMs) * 100
+    }
+
+    progressRaf = requestAnimationFrame(tick)
+  }
+
+  progressRaf = requestAnimationFrame(tick)
+})
+
+onUnmounted(() => {
+  cancelAnimationFrame(progressRaf)
+})
 
 const scaffoldActive = ref('home')
 const scaffoldPersistSlots = ref(false)
@@ -608,8 +636,21 @@ function toggleDark() {
         <h2 class="mb-4 md-typescale-title-large">Phase 2b — Feedback</h2>
         <div class="space-y-6 rounded-lg border border-outline-variant bg-surface-container-low p-6">
           <div class="space-y-4">
-            <M3Progress :model-value="progressValue" variant="linear" />
-            <M3Progress :model-value="progressValue" variant="circular" />
+            <p class="md-typescale-body-medium text-on-surface-variant">
+              {{ Math.round(progressValue) }}%
+            </p>
+            <M3Progress
+              :key="`linear-${progressCycle}`"
+              :model-value="progressValue"
+              variant="linear"
+              class="[&_*]:!transition-none"
+            />
+            <M3Progress
+              :key="`circular-${progressCycle}`"
+              :model-value="progressValue"
+              variant="circular"
+              class="[&_*]:!transition-none"
+            />
           </div>
 
           <M3SnackbarProvider>
