@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
-export { textFieldContainerVariants as selectContainerVariants, textFieldVariants as selectRootVariants } from '../text-field/text-field.variants'
+export { fieldContainerVariants as selectContainerVariants, fieldRootVariants as selectRootVariants } from '../field/field.variants'
 
 export const selectTriggerVariants = cva([
   'm3-select__trigger',

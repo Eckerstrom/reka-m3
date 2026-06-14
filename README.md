@@ -55,6 +55,8 @@ import { M3TextField } from 'reka-m3/components/text-field'
 | `M3Fab` | Floating action button |
 | `M3ExtendedFab` | FAB with icon + label |
 | `M3FabMenu` | Speed-dial FAB menu |
+| `M3FieldLabel` | Floating label for M3 form fields |
+| `M3FieldSupportText` | Helper / error text below form fields |
 | `M3TextField` | Filled / outlined text input |
 | `M3Select` | M3 select field (filled / outlined), single value — form control, not an action menu (`M3Menu*`) |
 | `M3Checkbox`, `M3CheckboxGroup` | Checkbox with indeterminate support |

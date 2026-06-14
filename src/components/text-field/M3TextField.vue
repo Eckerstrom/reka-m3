@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { Label } from 'reka-ui'
 import { computed, useAttrs, useId } from 'vue'
 import { cn } from '../../utils/cn'
+import M3FieldLabel from '../field/M3FieldLabel.vue'
+import M3FieldSupportText from '../field/M3FieldSupportText.vue'
 import { textFieldContainerVariants, textFieldVariants } from './text-field.variants'
 import type { M3TextFieldProps } from './types'
 
@@ -42,13 +43,9 @@ const supportText = computed(() => (props.error && props.errorText ? props.error
     "
   >
     <div :class="textFieldContainerVariants({ variant, error: !!error })">
-      <Label
-        :for="fieldId"
-        class="m3-text-field__label pointer-events-none absolute start-4 top-2 transition-all md-typescale-body-small text-on-surface-variant"
-      >
+      <M3FieldLabel :for="fieldId" :required="required">
         {{ label }}
-        <span v-if="required" aria-hidden="true"> *</span>
-      </Label>
+      </M3FieldLabel>
 
       <textarea
         v-if="multiline"
@@ -80,13 +77,12 @@ const supportText = computed(() => (props.error && props.errorText ? props.error
       />
     </div>
 
-    <p
+    <M3FieldSupportText
       v-if="supportText"
       :id="helperId"
-      class="px-4 md-typescale-body-small"
-      :class="error ? 'text-error' : 'text-on-surface-variant'"
+      :error="!!error"
     >
       {{ supportText }}
-    </p>
+    </M3FieldSupportText>
   </div>
 </template>
