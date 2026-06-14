@@ -57,6 +57,7 @@ import {
   M3Search,
   M3SearchItem,
   M3SegmentedButton,
+  M3Select,
   M3SideSheetContent,
   M3SideSheetRoot,
   M3SideSheetTitle,
@@ -150,6 +151,27 @@ const sliderValue = ref([40])
 const filledField = ref('')
 const outlinedField = ref('Invalid')
 const errorField = ref('')
+
+const countryItems = [
+  { label: 'United States', value: 'us' },
+  { label: 'Canada', value: 'ca' },
+  { label: 'United Kingdom', value: 'uk' },
+  { label: 'Germany', value: 'de' },
+  { label: 'Japan', value: 'jp' },
+]
+
+const statusItems = [
+  { label: 'Draft', value: 'draft' },
+  { label: 'In review', value: 'review' },
+  { label: 'Published', value: 'published' },
+  { label: 'Archived', value: 'archived', disabled: true },
+  { label: 'Rejected', value: 'rejected' },
+]
+
+const filledSelect = ref<string | undefined>()
+const outlinedSelect = ref<string | undefined>('us')
+const disabledSelect = ref<string | undefined>('draft')
+const errorSelect = ref<string | undefined>()
 
 const dialogOpen = ref(false)
 const bottomSheetOpen = ref(false)
@@ -403,6 +425,60 @@ function toggleDark() {
             error
             error-text="Enter a valid email address"
           />
+
+          <div>
+            <h3 class="mb-4 md-typescale-title-medium">Select</h3>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div class="space-y-2">
+                <M3Select
+                  v-model="filledSelect"
+                  variant="filled"
+                  label="Country"
+                  placeholder="Select a country"
+                  helper-text="Filled select field"
+                  :items="countryItems"
+                />
+                <p class="px-4 md-typescale-body-small text-on-surface-variant">
+                  Value: {{ filledSelect ?? '(empty)' }}
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <M3Select
+                  v-model="outlinedSelect"
+                  variant="outlined"
+                  label="Country"
+                  placeholder="Select a country"
+                  helper-text="Outlined with selection"
+                  :items="countryItems"
+                />
+                <p class="px-4 md-typescale-body-small text-on-surface-variant">
+                  Value: {{ outlinedSelect ?? '(empty)' }}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6 grid gap-6 md:grid-cols-2">
+              <M3Select
+                v-model="disabledSelect"
+                variant="outlined"
+                label="Status"
+                placeholder="Select status"
+                disabled
+                :items="statusItems"
+              />
+              <M3Select
+                v-model="errorSelect"
+                variant="outlined"
+                label="Status"
+                placeholder="Select status"
+                required
+                error
+                error-text="Status is required"
+                :items="statusItems"
+              />
+            </div>
+          </div>
 
           <div class="grid gap-6 md:grid-cols-2">
             <div class="space-y-3">
