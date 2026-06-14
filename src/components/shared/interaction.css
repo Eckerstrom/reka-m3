@@ -54,3 +54,13 @@
 .m3-interactive:active:not(:disabled):not([data-disabled])::before {
   opacity: var(--m3-state-pressed-opacity);
 }
+
+/* Nav destinations: propagate hover/press to the icon pill while the label stays outside it */
+.m3-nav-destination:hover > .m3-interactive:not(:disabled):not([data-disabled])::before,
+.m3-nav-destination:focus-visible > .m3-interactive:not(:disabled):not([data-disabled])::before {
+  opacity: var(--m3-state-hover-opacity);
+}
+
+.m3-nav-destination:active > .m3-interactive:not(:disabled):not([data-disabled])::before {
+  opacity: var(--m3-state-pressed-opacity);
+}

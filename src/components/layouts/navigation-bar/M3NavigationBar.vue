@@ -2,6 +2,7 @@
 import { cn } from '../../../utils/cn'
 import {
   navigationBarBadgeVariants,
+  navigationBarIconContainerVariants,
   navigationBarIconVariants,
   navigationBarIndicatorVariants,
   navigationBarVariants,
@@ -26,19 +27,25 @@ function select(value: string) {
       :label="item.label"
       @click="select(item.value)"
     >
-      <span v-if="modelValue === item.value" :class="navigationBarIndicatorVariants()" aria-hidden="true" />
-      <span :class="navigationBarIconVariants({ active: modelValue === item.value })">
-        <component :is="item.icon" v-if="item.icon" />
-        <slot v-else :name="item.value" />
+      <span :class="navigationBarIconContainerVariants({ active: modelValue === item.value })">
+        <span
+          v-if="modelValue === item.value"
+          :class="navigationBarIndicatorVariants()"
+          aria-hidden="true"
+        />
+        <span :class="navigationBarIconVariants({ active: modelValue === item.value })">
+          <component :is="item.icon" v-if="item.icon" />
+          <slot v-else :name="item.value" />
+        </span>
+        <span
+          v-if="item.badge !== undefined"
+          :class="navigationBarBadgeVariants()"
+          :aria-label="`${item.badge} notifications`"
+        >
+          {{ item.badge }}
+        </span>
       </span>
-      <span class="relative z-[1] max-w-full truncate">{{ item.label }}</span>
-      <span
-        v-if="item.badge !== undefined"
-        :class="navigationBarBadgeVariants()"
-        :aria-label="`${item.badge} notifications`"
-      >
-        {{ item.badge }}
-      </span>
+      <span class="max-w-full truncate">{{ item.label }}</span>
     </M3NavigationBarItem>
   </nav>
 </template>

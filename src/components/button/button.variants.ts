@@ -1,7 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import {
   filledColorCompounds,
-  filledElevatedOnColorCompounds,
   surfaceColorCompounds,
   tonalColorCompounds,
 } from '../../lib/variants/color-roles'
@@ -45,7 +44,6 @@ export const buttonVariants = cva(
       ...surfaceColorCompounds('outlined'),
       ...surfaceColorCompounds('text'),
       ...surfaceColorCompounds('elevated'),
-      ...filledElevatedOnColorCompounds(),
     ],
     defaultVariants: {
       variant: 'filled',

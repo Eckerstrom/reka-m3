@@ -3,7 +3,6 @@ export {
   chipFilterSelectedColorCompounds,
   fabColorCompounds,
   filledColorCompounds,
-  filledElevatedOnColorCompounds,
   iconFilledColorCompounds,
   iconFilledTonalColorCompounds,
   iconOutlinedColorCompounds,

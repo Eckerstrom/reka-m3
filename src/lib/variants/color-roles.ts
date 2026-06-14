@@ -108,23 +108,6 @@ export function surfaceColorCompounds(
   ]
 }
 
-/** filled + elevated share on-{color} text (preserves legacy matrix) */
-export function filledElevatedOnColorCompounds(): Array<
-  ColorCompoundVariant<'filled' | 'elevated'>
-> {
-  const onColorClasses: Record<ColorRole, string> = {
-    primary: 'text-on-primary [--m3-state-color:var(--color-on-primary)]',
-    secondary: 'text-on-secondary [--m3-state-color:var(--color-on-secondary)]',
-    tertiary: 'text-on-tertiary [--m3-state-color:var(--color-on-tertiary)]',
-    error: 'text-on-error [--m3-state-color:var(--color-on-error)]',
-  }
-
-  return COLOR_ROLES.flatMap((color) => [
-    { variant: 'filled' as const, color, class: onColorClasses[color] },
-    { variant: 'elevated' as const, color, class: onColorClasses[color] },
-  ])
-}
-
 /** icon button standard variant color tints */
 export function iconStandardColorCompounds(): ColorCompoundVariant<'standard'>[] {
   return [

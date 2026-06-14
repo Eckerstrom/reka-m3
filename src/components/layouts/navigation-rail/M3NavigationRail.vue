@@ -3,6 +3,7 @@ import { cn } from '../../../utils/cn'
 import {
   navigationRailBadgeVariants,
   navigationRailHeaderVariants,
+  navigationRailIconContainerVariants,
   navigationRailIconVariants,
   navigationRailIndicatorVariants,
   navigationRailItemVariants,
@@ -34,23 +35,25 @@ function select(value: string) {
         :aria-current="modelValue === item.value ? 'page' : undefined"
         @click="select(item.value)"
       >
-        <span
-          v-if="modelValue === item.value"
-          :class="navigationRailIndicatorVariants()"
-          aria-hidden="true"
-        />
-        <span :class="navigationRailIconVariants({ active: modelValue === item.value })">
-          <component :is="item.icon" v-if="item.icon" />
-          <slot v-else :name="item.value" />
+        <span :class="navigationRailIconContainerVariants({ active: modelValue === item.value })">
+          <span
+            v-if="modelValue === item.value"
+            :class="navigationRailIndicatorVariants()"
+            aria-hidden="true"
+          />
+          <span :class="navigationRailIconVariants({ active: modelValue === item.value })">
+            <component :is="item.icon" v-if="item.icon" />
+            <slot v-else :name="item.value" />
+          </span>
+          <span
+            v-if="item.badge !== undefined"
+            :class="navigationRailBadgeVariants()"
+            :aria-label="`${item.badge} notifications`"
+          >
+            {{ item.badge }}
+          </span>
         </span>
-        <span class="relative z-[1] max-w-full truncate text-center">{{ item.label }}</span>
-        <span
-          v-if="item.badge !== undefined"
-          :class="navigationRailBadgeVariants()"
-          :aria-label="`${item.badge} notifications`"
-        >
-          {{ item.badge }}
-        </span>
+        <span class="max-w-full truncate text-center">{{ item.label }}</span>
       </button>
     </div>
   </nav>

@@ -11,16 +11,34 @@ export const navigationRailItemsVariants = cva('flex flex-1 flex-col items-stret
 
 export const navigationRailItemVariants = cva(
   [
-    'm3-interactive',
+    'm3-nav-destination',
     'relative flex flex-col items-center justify-center gap-1',
     'px-3 py-3',
     'md-typescale-label-medium text-on-surface-variant',
+  ],
+  {
+    variants: {
+      active: {
+        true: 'text-on-secondary-container',
+        false: '',
+      },
+    },
+    defaultVariants: {
+      active: false,
+    },
+  },
+)
+
+export const navigationRailIconContainerVariants = cva(
+  [
+    'm3-interactive',
+    'relative flex h-8 min-w-16 items-center justify-center rounded-full',
     '[--m3-state-color:var(--color-on-surface-variant)]',
   ],
   {
     variants: {
       active: {
-        true: 'text-on-secondary-container [--m3-state-color:var(--color-on-secondary-container)]',
+        true: '[--m3-state-color:var(--color-on-secondary-container)]',
         false: '',
       },
     },
@@ -31,7 +49,7 @@ export const navigationRailItemVariants = cva(
 )
 
 export const navigationRailIndicatorVariants = cva(
-  'absolute inset-x-2 top-2 h-8 rounded-full bg-secondary-container',
+  'absolute inset-0 rounded-full bg-secondary-container',
 )
 
 export const navigationRailIconVariants = cva('relative z-[1] size-6', {
@@ -47,7 +65,7 @@ export const navigationRailIconVariants = cva('relative z-[1] size-6', {
 })
 
 export const navigationRailBadgeVariants = cva([
-  'absolute end-2 top-2 z-[2]',
+  'absolute -end-0.5 -top-0.5 z-[2]',
   'flex min-h-4 min-w-4 items-center justify-center rounded-full',
   'bg-error px-1 md-typescale-label-small text-on-error',
 ])
