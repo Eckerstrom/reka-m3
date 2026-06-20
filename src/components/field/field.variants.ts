@@ -25,23 +25,21 @@ export const fieldRootVariants = cva(['m3-field flex w-full max-w-md flex-col ga
 export const fieldContainerVariants = cva(
   [
     'm3-field__container relative transition-colors',
-    'focus-within:border-primary',
+    'focus-within:ring-2 focus-within:ring-inset focus-within:ring-offset-0',
   ],
   {
     variants: {
       variant: {
         filled: [
           'rounded-t-sm border-b border-on-surface-variant bg-surface-container-highest px-4 pt-6 pb-2',
-          'focus-within:border-b-2',
         ],
         outlined: [
           'rounded-sm border border-outline-variant px-4 py-2',
-          'focus-within:border-2',
         ],
       },
       error: {
-        true: 'border-error focus-within:border-error',
-        false: '',
+        true: 'border-error focus-within:border-error focus-within:ring-error',
+        false: 'focus-within:border-primary focus-within:ring-primary',
       },
     },
     compoundVariants: [
