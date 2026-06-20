@@ -58,7 +58,10 @@ const supportText = computed(() => (props.error && props.errorText ? props.error
         )
       "
     >
-      <div :class="selectContainerVariants({ variant, error: !!error })">
+      <div
+        :class="selectContainerVariants({ variant, error: !!error })"
+        :data-error="error ? true : undefined"
+      >
         <M3FieldLabel :for="fieldId" :required="required">
           {{ label }}
         </M3FieldLabel>
