@@ -1,4 +1,10 @@
-import { argbFromHex, themeFromSourceColor } from '@material/material-color-utilities'
+import {
+  argbFromHex,
+  Hct,
+  hexFromArgb,
+  MaterialDynamicColors,
+  SchemeTonalSpot,
+} from '@material/material-color-utilities'
 import { defaultDarkColor, defaultTheme } from './default-theme'
 import type {
   ColorScheme,
@@ -34,13 +40,6 @@ function camelToKebab(value: string): string {
 
 function typographyScaleToCssPrefix(name: TypographyScaleName): string {
   return `--md-sys-typescale-${camelToKebab(name)}`
-}
-
-function argbToHex(argb: number): string {
-  const r = (argb >> 16) & 0xff
-  const g = (argb >> 8) & 0xff
-  const b = argb & 0xff
-  return `#${[r, g, b].map((c) => c.toString(16).padStart(2, '0')).join('')}`
 }
 
 function mergeTypographyStyle(
@@ -102,12 +101,17 @@ export function themeToCssVars(theme: ThemeConfig): Record<string, string> {
 }
 
 export function createThemeFromSeed(seed: string, scheme: 'light' | 'dark' = 'light'): ThemeConfig {
-  const materialTheme = themeFromSourceColor(argbFromHex(seed))
-  const palette = materialTheme.schemes[scheme]
+  const isDark = scheme === 'dark'
+  const dynamicScheme = new SchemeTonalSpot(Hct.fromInt(argbFromHex(seed)), isDark, 0)
 
   const color = {} as ColorScheme
   for (const key of colorKeys) {
-    color[key] = argbToHex(palette[key as keyof typeof palette] as number)
+    const dynamicColor = MaterialDynamicColors[key as keyof typeof MaterialDynamicColors]
+    if (dynamicColor && typeof dynamicColor === 'object' && 'getArgb' in dynamicColor) {
+      color[key] = hexFromArgb(dynamicColor.getArgb(dynamicScheme))
+    } else {
+      color[key] = defaultTheme.color[key]
+    }
   }
 
   return createTheme({ color })

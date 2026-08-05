@@ -53,7 +53,7 @@ function select(value: string) {
             {{ item.badge }}
           </span>
         </span>
-        <span class="max-w-full truncate text-center">{{ item.label }}</span>
+        <span class="max-w-full text-balance text-center leading-tight">{{ item.label }}</span>
       </button>
     </div>
   </nav>

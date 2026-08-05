@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ToastClose, ToastDescription, ToastTitle } from 'reka-ui'
-import { cn } from '../../utils/cn'
 import { snackbarDescriptionVariants, snackbarTitleVariants } from './snackbar.variants'
 import type { HTMLAttributes } from 'vue'
 
