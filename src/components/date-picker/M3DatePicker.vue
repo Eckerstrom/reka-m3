@@ -29,6 +29,7 @@ import {
   datePickerHeaderVariants,
   datePickerHeadingVariants,
   datePickerInputVariants,
+  datePickerLabelVariants,
   datePickerNavButtonVariants,
   datePickerTriggerVariants,
 } from './date-picker.variants'
@@ -39,81 +40,103 @@ const emits = defineEmits<{ 'update:modelValue': [value: DateValue | undefined] 
 </script>
 
 <template>
-  <DatePickerRoot
-    :model-value="modelValue ?? undefined"
-    :locale="locale"
-    :disabled="disabled"
-    close-on-select
-    @update:model-value="emits('update:modelValue', $event)"
-  >
-    <DatePickerField v-slot="{ segments }" :class="cn(datePickerFieldVariants(), props.class)">
-      <template v-for="segment in segments" :key="segment.part">
-        <DatePickerInput :part="segment.part" :class="datePickerInputVariants()">
-          {{ segment.value }}
-        </DatePickerInput>
-      </template>
-      <DatePickerTrigger :class="datePickerTriggerVariants()" aria-label="Open calendar">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path
-            d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"
-          />
-        </svg>
-      </DatePickerTrigger>
-    </DatePickerField>
+  <div class="flex w-full flex-col">
+    <label v-if="label" :class="datePickerLabelVariants()">{{ label }}</label>
 
-    <DatePickerContent :class="datePickerContentVariants()">
-      <DatePickerCalendar v-slot="{ weekDays, grid }" :class="datePickerCalendarVariants()">
-        <DatePickerHeader :class="datePickerHeaderVariants()">
-          <DatePickerPrev :class="datePickerNavButtonVariants()" aria-label="Previous month">
-            ‹
-          </DatePickerPrev>
-          <DatePickerHeading :class="datePickerHeadingVariants()" />
-          <DatePickerNext :class="datePickerNavButtonVariants()" aria-label="Next month">
-            ›
-          </DatePickerNext>
-        </DatePickerHeader>
+    <DatePickerRoot
+      :model-value="modelValue ?? undefined"
+      :locale="locale"
+      :disabled="disabled"
+      close-on-select
+      @update:model-value="emits('update:modelValue', $event)"
+    >
+      <DatePickerField
+        v-slot="{ segments }"
+        :class="cn(datePickerFieldVariants(), props.class)"
+      >
+        <template v-for="segment in segments" :key="segment.part">
+          <DatePickerInput
+            v-if="segment.part === 'literal'"
+            :part="segment.part"
+            class="px-0.5 md-typescale-body-large text-on-surface-variant"
+          >
+            {{ segment.value }}
+          </DatePickerInput>
+          <DatePickerInput
+            v-else
+            :part="segment.part"
+            :class="datePickerInputVariants()"
+          >
+            {{ segment.value }}
+          </DatePickerInput>
+        </template>
+        <DatePickerTrigger :class="datePickerTriggerVariants()" aria-label="Open calendar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5z"
+            />
+          </svg>
+        </DatePickerTrigger>
+      </DatePickerField>
 
-        <DatePickerGrid
-          v-for="month in grid"
-          :key="month.value.toString()"
-          class="w-full border-collapse"
-        >
-          <DatePickerGridHead>
-            <DatePickerGridRow class="grid grid-cols-7">
-              <DatePickerHeadCell
-                v-for="day in weekDays"
-                :key="day"
-                :class="datePickerHeadCellVariants()"
-              >
-                {{ day }}
-              </DatePickerHeadCell>
-            </DatePickerGridRow>
-          </DatePickerGridHead>
-          <DatePickerGridBody>
-            <DatePickerGridRow
-              v-for="(weekDates, rowIndex) in month.rows"
-              :key="`week-${rowIndex}`"
-              class="grid grid-cols-7"
-            >
-              <DatePickerCell
-                v-for="weekDate in weekDates"
-                :key="weekDate.toString()"
-                :date="weekDate"
-              >
-                <DatePickerCellTrigger
-                  :day="weekDate"
-                  :month="month.value"
-                  :class="datePickerCellTriggerVariants()"
+      <DatePickerContent :class="datePickerContentVariants()">
+        <DatePickerCalendar v-slot="{ weekDays, grid }" :class="datePickerCalendarVariants()">
+          <DatePickerHeader :class="datePickerHeaderVariants()">
+            <DatePickerPrev :class="datePickerNavButtonVariants()" aria-label="Previous month">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+              </svg>
+            </DatePickerPrev>
+            <DatePickerHeading :class="datePickerHeadingVariants()" />
+            <DatePickerNext :class="datePickerNavButtonVariants()" aria-label="Next month">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+              </svg>
+            </DatePickerNext>
+          </DatePickerHeader>
+
+          <DatePickerGrid
+            v-for="month in grid"
+            :key="month.value.toString()"
+            class="w-full border-collapse"
+          >
+            <DatePickerGridHead>
+              <DatePickerGridRow class="grid grid-cols-7">
+                <DatePickerHeadCell
+                  v-for="day in weekDays"
+                  :key="day"
+                  :class="datePickerHeadCellVariants()"
                 >
-                  <template #default="{ dayValue }">
-                    {{ dayValue }}
-                  </template>
-                </DatePickerCellTrigger>
-              </DatePickerCell>
-            </DatePickerGridRow>
-          </DatePickerGridBody>
-        </DatePickerGrid>
-      </DatePickerCalendar>
-    </DatePickerContent>
-  </DatePickerRoot>
+                  {{ day }}
+                </DatePickerHeadCell>
+              </DatePickerGridRow>
+            </DatePickerGridHead>
+            <DatePickerGridBody>
+              <DatePickerGridRow
+                v-for="(weekDates, rowIndex) in month.rows"
+                :key="`week-${rowIndex}`"
+                class="grid grid-cols-7"
+              >
+                <DatePickerCell
+                  v-for="weekDate in weekDates"
+                  :key="weekDate.toString()"
+                  :date="weekDate"
+                >
+                  <DatePickerCellTrigger
+                    :day="weekDate"
+                    :month="month.value"
+                    :class="datePickerCellTriggerVariants()"
+                  >
+                    <template #default="{ dayValue }">
+                      {{ dayValue }}
+                    </template>
+                  </DatePickerCellTrigger>
+                </DatePickerCell>
+              </DatePickerGridRow>
+            </DatePickerGridBody>
+          </DatePickerGrid>
+        </DatePickerCalendar>
+      </DatePickerContent>
+    </DatePickerRoot>
+  </div>
 </template>

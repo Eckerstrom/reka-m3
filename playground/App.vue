@@ -696,14 +696,21 @@ function toggleDark() {
           <M3ChipInput v-model="chipInputTags" class="max-w-md" />
 
           <div class="grid gap-6 md:grid-cols-2">
-            <M3DatePicker
-              :model-value="(selectedDate ?? undefined) as DateValue | undefined"
-              @update:model-value="selectedDate = ($event ?? null) as DateValue | null"
-            />
-            <M3TimePicker
-              :model-value="(selectedTime ?? undefined) as TimeValue | undefined"
-              @update:model-value="selectedTime = ($event ?? null) as TimeValue | null"
-            />
+            <div class="space-y-2">
+              <p class="md-typescale-label-large text-on-surface-variant">Date</p>
+              <M3DatePicker
+                :model-value="(selectedDate ?? undefined) as DateValue | undefined"
+                @update:model-value="selectedDate = ($event ?? null) as DateValue | null"
+              />
+            </div>
+            <div class="space-y-2">
+              <p class="md-typescale-label-large text-on-surface-variant">Time</p>
+              <M3TimePicker
+                :model-value="(selectedTime ?? undefined) as TimeValue | undefined"
+                :hour-cycle="24"
+                @update:model-value="selectedTime = ($event ?? null) as TimeValue | null"
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority'
 
 /** M3 scrim overlay — token-based dimming */
 export const scrimOverlayVariants = cva(
-  'fixed inset-0 z-50 bg-[color-mix(in_srgb,var(--md-sys-color-on-surface)_32%,transparent)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+  'fixed inset-0 z-[1000] bg-[color-mix(in_srgb,var(--md-sys-color-on-surface)_32%,transparent)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
 )
 
 export const dialogSurfaceVariants = cva(

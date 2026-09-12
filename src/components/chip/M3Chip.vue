@@ -23,10 +23,10 @@ function onToggleUpdate(value: boolean) {
 <template>
   <Toggle
     v-if="isFilter"
-    :pressed="selected"
+    :model-value="selected"
     :disabled="disabled"
     :class="cn(chipVariants({ variant, color }), props.class)"
-    @update:pressed="onToggleUpdate"
+    @update:model-value="onToggleUpdate"
   >
     <span class="relative z-[1] inline-flex items-center gap-1">
       <slot />

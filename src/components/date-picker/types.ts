@@ -6,6 +6,8 @@ export interface M3DatePickerProps {
   class?: HTMLAttributes['class']
   locale?: string
   disabled?: boolean
+  /** Optional accessible / visible label above the field. */
+  label?: string
 }
 
 export type { DateValue }

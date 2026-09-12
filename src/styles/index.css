@@ -4,6 +4,7 @@
 @import '../components/shared/interaction.css';
 
 @source "../components";
+@source "../lib";
 
 @theme inline {
   --color-primary: var(--md-sys-color-primary);

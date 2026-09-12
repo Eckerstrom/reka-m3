@@ -5,7 +5,7 @@ export const bottomSheetOverlayVariants = scrimOverlayVariants
 
 export const bottomSheetContentVariants = cva(
   [
-    'fixed inset-x-0 bottom-0 z-50 flex max-h-[90vh] flex-col',
+    'fixed inset-x-0 bottom-0 z-[1000] flex max-h-[90vh] flex-col',
     'rounded-t-xl border-t border-outline-variant',
     dialogSurfaceVariants({ variant: 'basic' }),
     'data-[state=open]:animate-in data-[state=closed]:animate-out',

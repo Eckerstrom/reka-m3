@@ -4,7 +4,7 @@ import { dialogSurfaceVariants, scrimOverlayVariants } from '../../lib/variants/
 export const navigationDrawerOverlayVariants = scrimOverlayVariants
 
 export const navigationDrawerContentVariants = cva([
-  'fixed inset-y-0 start-0 z-50 flex w-full max-w-[360px] flex-col',
+  'fixed inset-y-0 start-0 z-[1000] flex w-full max-w-[360px] flex-col',
   dialogSurfaceVariants({ variant: 'basic' }),
   'rounded-e-xl border-e border-outline-variant p-2',
   'data-[state=open]:animate-in data-[state=closed]:animate-out',

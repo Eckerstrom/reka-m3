@@ -17,7 +17,7 @@ export const chipVariants = cva(chipBase, {
     variant: {
       assist: 'bg-transparent text-on-surface [--m3-state-color:var(--color-on-surface)]',
       filter:
-        'bg-transparent text-on-surface-variant [--m3-state-color:var(--color-on-surface-variant)]',
+        'bg-transparent text-on-surface-variant [--m3-state-color:var(--color-on-surface-variant)] data-[state=on]:border-primary data-[state=on]:bg-secondary-container data-[state=on]:text-on-secondary-container data-[state=on]:[--m3-state-color:var(--color-on-secondary-container)]',
       suggestion:
         'border-none bg-surface-container-low text-on-surface [--m3-state-color:var(--color-on-surface)]',
       elevated: [
@@ -38,7 +38,11 @@ export const chipVariants = cva(chipBase, {
       color,
       class: colorClass,
     })),
-    ...chipFilterSelectedColorCompounds(),
+    ...chipFilterSelectedColorCompounds().map(({ color, class: colorClass }) => ({
+      variant: 'filter' as const,
+      color,
+      class: colorClass,
+    })),
   ],
   defaultVariants: {
     variant: 'assist',

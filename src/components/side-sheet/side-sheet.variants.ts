@@ -4,7 +4,7 @@ import { dialogSurfaceVariants, scrimOverlayVariants } from '../../lib/variants/
 export const sideSheetOverlayVariants = scrimOverlayVariants
 
 export const sideSheetContentVariants = cva([
-  'fixed inset-y-0 end-0 z-50 flex w-full max-w-sm flex-col',
+  'fixed inset-y-0 end-0 z-[1000] flex w-full max-w-sm flex-col',
   'border-s border-outline-variant',
   dialogSurfaceVariants({ variant: 'basic' }),
   'rounded-s-xl p-6',
