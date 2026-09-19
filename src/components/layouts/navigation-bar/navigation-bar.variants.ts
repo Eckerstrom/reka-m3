@@ -1,7 +1,8 @@
 import { cva } from 'class-variance-authority'
 
 export const navigationBarVariants = cva([
-  'flex h-20 w-full items-stretch justify-around',
+  'flex w-full items-stretch justify-around',
+  'min-h-[calc(5rem+env(safe-area-inset-bottom))] pb-[env(safe-area-inset-bottom)]',
   'border-t border-outline-variant bg-surface px-2',
 ])
 

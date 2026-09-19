@@ -16,8 +16,8 @@ export const bottomSheetContentVariants = cva(
   {
     variants: {
       density: {
-        standard: 'p-4 pt-2',
-        modal: 'p-6 pt-3',
+        standard: 'px-4 pt-2 pb-[max(1rem,env(safe-area-inset-bottom))]',
+        modal: 'px-6 pt-3 pb-[max(1.5rem,env(safe-area-inset-bottom))]',
       },
     },
     defaultVariants: {

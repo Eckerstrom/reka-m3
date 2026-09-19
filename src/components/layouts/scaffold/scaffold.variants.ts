@@ -2,13 +2,30 @@ import { cva } from 'class-variance-authority'
 
 export const scaffoldVariants = cva([
   'flex h-full min-h-dvh flex-col',
-  'pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]',
   'bg-surface text-on-surface',
 ])
 
 export const scaffoldTopBarVariants = cva('shrink-0')
 
-export const scaffoldBodyVariants = cva('flex min-h-0 min-w-0 flex-1 overflow-hidden')
+export const scaffoldBodyVariants = cva(
+  'flex min-h-0 min-w-0 flex-1 overflow-hidden',
+  {
+    variants: {
+      insetTop: {
+        true: 'pt-[env(safe-area-inset-top)]',
+        false: '',
+      },
+      insetBottom: {
+        true: 'pb-[env(safe-area-inset-bottom)]',
+        false: '',
+      },
+    },
+    defaultVariants: {
+      insetTop: false,
+      insetBottom: false,
+    },
+  },
+)
 
 export const scaffoldPaneColumnVariants = cva('flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden')
 

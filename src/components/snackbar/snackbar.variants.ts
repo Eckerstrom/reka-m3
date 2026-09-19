@@ -1,7 +1,8 @@
 import { cva } from 'class-variance-authority'
 
 export const snackbarViewportVariants = cva(
-  'fixed bottom-4 left-1/2 z-[100] flex max-h-screen w-full max-w-md -translate-x-1/2 flex-col gap-2 p-4',
+  // --m3-snackbar-inset-bottom: set by scaffold when a bottom bar is visible
+  'fixed bottom-[calc(1rem+var(--m3-snackbar-inset-bottom,0px))] left-1/2 z-[100] flex max-h-screen w-full max-w-md -translate-x-1/2 flex-col gap-2 p-4',
 )
 
 export const snackbarRootVariants = cva(

@@ -42,7 +42,14 @@ const showBottomBar = computed(() => windowSize.value === 'compact' && hasBottom
 </script>
 
 <template>
-  <div :class="cn(scaffoldVariants(), props.class)">
+  <div
+    :class="cn(scaffoldVariants(), props.class)"
+    :style="
+      showBottomBar
+        ? { '--m3-snackbar-inset-bottom': 'calc(5rem + env(safe-area-inset-bottom))' }
+        : undefined
+    "
+  >
     <div v-if="!persistSlots && showTopBar" :class="scaffoldTopBarVariants()">
       <slot name="top-bar" />
     </div>
@@ -56,7 +63,14 @@ const showBottomBar = computed(() => windowSize.value === 'compact' && hasBottom
       <slot name="top-bar" />
     </div>
 
-    <div :class="scaffoldBodyVariants()">
+    <div
+      :class="
+        scaffoldBodyVariants({
+          insetTop: !showTopBar,
+          insetBottom: !showBottomBar,
+        })
+      "
+    >
       <aside v-if="!persistSlots && showNavRail" :class="scaffoldNavRailVariants()">
         <slot name="nav-rail" />
       </aside>
